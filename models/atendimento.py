@@ -1,14 +1,12 @@
+from datetime import datetime
+
 class Atendimento:
-    def __init__(
-        self,
-        cliente,
-        atendente,
-        data_inicio,
-        data_fim,
-        duracao
-    ):
+
+    def __init__(self):
         self.cliente = cliente
         self.atendente = atendente
-        self.data_inicio = data_inicio
-        self.data_fim = data_fim
-        self.duracao = duracao
+        self.data_inicio = datetime.now()
+        self.data_fim = None
+        self.duracao = None
+
+    
