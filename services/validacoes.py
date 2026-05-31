@@ -1,8 +1,8 @@
 from models.cliente import Cliente
 from models.atendente import Atendente
 
-def validar_cliente(id_cliente, nome_cliente, telefone_cliente):
-    for cliente in cliente:
+def validar_cliente(id_cliente, nome_cliente, telefone_cliente,clientes):
+    for cliente in clientes:
         if cliente.id == id_cliente:
             print("ID já cadastrado. Tente novamente.")
             return False
@@ -17,8 +17,8 @@ def validar_cliente(id_cliente, nome_cliente, telefone_cliente):
 
     return True
 
-def validar_atendente(id_atendente, nome_atendente):
-    for atendente in atendente:
+def validar_atendente(id_atendente, nome_atendente, atendentes):
+    for atendente in atendentes:
         if atendente.id == id_atendente:
             print("ID já cadastrado. Tente novamente.")
             return False
