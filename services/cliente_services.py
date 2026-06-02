@@ -1,9 +1,44 @@
+from utils.arquivo import carregar_json, salvar_json
 from models.atendente import Atendente
 from models.cliente import Cliente
 from services.validacoes import validar_cliente, validar_atendente
 
-clientes = []
-atendentes = []
+dados_clientes = carregar_json("data/clientes.json")
+dados_atendentes = carregar_json("data/atendentes.json")
+
+clientes = [
+    Cliente(
+        cliente["id"],
+        cliente["nome"],
+        cliente["telefone"],
+        cliente["prioridade"]
+    )
+    for cliente in dados_clientes
+]
+
+atendentes = [
+    Atendente(
+        atendente["id"],
+        atendente["nome"]
+    )
+    for atendente in dados_atendentes
+]
+
+
+def salvar_clientes():
+
+    salvar_json(
+        "data/clientes.json",
+        [cliente.to_dict() for cliente in clientes]
+    )
+
+
+def salvar_atendentes():
+
+    salvar_json(
+        "data/atendentes.json",
+        [atendente.to_dict() for atendente in atendentes]
+    )
 
 
 def cadastrar_cliente():
@@ -41,6 +76,8 @@ def cadastrar_cliente():
     )
 
     clientes.append(cliente)
+
+    salvar_clientes()
 
     print("Cliente cadastrado com sucesso!")
 
@@ -97,6 +134,8 @@ def cadastrar_atendente():
     )
 
     atendentes.append(atendente)
+
+    salvar_atendentes()
 
     print("Atendente cadastrado com sucesso!")
 

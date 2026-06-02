@@ -1,19 +1,24 @@
 class Cliente:
-    def __init__(self, id, nome, telefone, prioridade = False):
+
+    def __init__(self, id, nome, telefone, prioridade=False):
         self.id = id
         self.nome = nome
         self.telefone = telefone
         self.prioridade = prioridade
 
-
     def __str__(self):
-        if(self.prioridade == True):
+
+        if self.prioridade:
             prioridade_texto = "Sim"
         else:
             prioridade_texto = "Não"
 
-        return f"ID: {self.id} | Nome: {self.nome} | Telefone: {self.telefone} | Prioridade: {prioridade_texto}"
-    #criar dicionario para armazenar os clientes e coloca no json
+        return (
+            f"ID: {self.id} | "
+            f"Nome: {self.nome} | "
+            f"Telefone: {self.telefone} | "
+            f"Prioridade: {prioridade_texto}"
+        )
 
     def to_dict(self):
 
@@ -21,4 +26,5 @@ class Cliente:
             "id": self.id,
             "nome": self.nome,
             "telefone": self.telefone,
-            "prioridade": self.prioridade}
+            "prioridade": self.prioridade
+        }
