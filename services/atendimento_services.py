@@ -12,8 +12,15 @@ historico = []
 
 def abrir_atendimento():
 
-    id_cliente = int(input("ID do cliente: "))
-    id_atendente = int(input("ID do atendente: "))
+    print("\n=== Abrir Atendimento ===")
+
+    try:
+        id_cliente = int(input("ID do cliente: "))
+        id_atendente = int(input("ID do atendente: "))
+
+    except ValueError:
+        print("Erro: digite apenas números para os IDs.")
+        return
 
     cliente = buscar_cliente_por_id(id_cliente)
     atendente = buscar_atendente_por_id(id_atendente)
@@ -25,10 +32,12 @@ def abrir_atendimento():
 
     atendimentos.append(atendimento)
 
-    print("Atendimento aberto!")
+    print("Atendimento aberto com sucesso!")
 
 
 def finalizar_atendimento():
+
+    print("\n=== Finalizar Atendimento ===")
 
     if len(atendimentos) == 0:
         print("Não há atendimentos abertos.")
@@ -39,15 +48,16 @@ def finalizar_atendimento():
     atendimento.data_fim = datetime.now()
     atendimento.duracao = atendimento.data_fim - atendimento.data_inicio
 
-    adcionar_historico(atendimento)
+    adicionar_historico(atendimento)
 
     atendimentos.remove(atendimento)
 
-    print("Atendimento fechado!")
-    print("Duração:", atendimento.duracao)
+    print("Atendimento finalizado com sucesso!")
+    print(f"Duração: {atendimento.duracao}")
 
 
-def adcionar_historico(atendimento):
+def adicionar_historico(atendimento):
+
     historico.append(atendimento)
 
 
@@ -60,12 +70,11 @@ def listar_historico():
         return
 
     for atendimento in historico:
-        print(
-            "Cliente: {}, Atendente: {}, Data início: {}, Data fim: {}, Duração: {}".format(
-                atendimento.cliente.nome,
-                atendimento.atendente.nome,
-                atendimento.data_inicio,
-                atendimento.data_fim,
-                atendimento.duracao
-            )
-        )
+
+        print("-" * 40)
+
+        print(f"Cliente: {atendimento.cliente.nome}")
+        print(f"Atendente: {atendimento.atendente.nome}")
+        print(f"Início: {atendimento.data_inicio}")
+        print(f"Fim: {atendimento.data_fim}")
+        print(f"Duração: {atendimento.duracao}")

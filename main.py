@@ -1,7 +1,7 @@
 from services.cliente_services import (
     cadastrar_cliente,
-    cadastrar_atendente,
     listar_clientes,
+    cadastrar_atendente,
     listar_atendentes
 )
 
@@ -10,9 +10,13 @@ from services.atendimento_services import (
     finalizar_atendimento,
     listar_historico
 )
-from services.validacoes import (validar_cliente, validar_atendente)
+
+from utils.logger import registrar_log
+
 
 def menu():
+
+    registrar_log("Sistema iniciado")
 
     while True:
 
@@ -32,32 +36,50 @@ def menu():
         opcao = input("\nEscolha uma opção: ")
 
         if opcao == "1":
+
             cadastrar_cliente()
+            registrar_log("Cadastro de cliente realizado")
 
         elif opcao == "2":
+
             cadastrar_atendente()
+            registrar_log("Cadastro de atendente realizado")
 
         elif opcao == "3":
+
             listar_clientes()
+            registrar_log("Listagem de clientes")
 
         elif opcao == "4":
+
             listar_atendentes()
+            registrar_log("Listagem de atendentes")
 
         elif opcao == "5":
+
             abrir_atendimento()
+            registrar_log("Atendimento aberto")
 
         elif opcao == "6":
+
             finalizar_atendimento()
+            registrar_log("Atendimento finalizado")
 
         elif opcao == "7":
+
             listar_historico()
+            registrar_log("Histórico consultado")
 
         elif opcao == "0":
-            print("Sistema encerrado.")
+
+            registrar_log("Sistema encerrado")
+            print("\nSistema encerrado.")
             break
 
         else:
-            print("Opção inválida!")
+
+            print("\nOpção inválida!")
+            registrar_log("Tentativa de acesso com opção inválida")
 
 
 if __name__ == "__main__":
