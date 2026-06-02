@@ -1,0 +1,71 @@
+from models.atendimento import Atendimento
+from datetime import datetime
+from services.validacoes import validar_atendimento
+from services.cliente_services import (
+    buscar_cliente_por_id,
+    buscar_atendente_por_id
+)
+
+atendimentos = []
+historico = []
+
+
+def abrir_atendimento():
+
+    id_cliente = int(input("ID do cliente: "))
+    id_atendente = int(input("ID do atendente: "))
+
+    cliente = buscar_cliente_por_id(id_cliente)
+    atendente = buscar_atendente_por_id(id_atendente)
+
+    if not validar_atendimento(cliente, atendente):
+        return
+
+    atendimento = Atendimento(cliente, atendente)
+
+    atendimentos.append(atendimento)
+
+    print("Atendimento aberto!")
+
+
+def finalizar_atendimento():
+
+    if len(atendimentos) == 0:
+        print("Não há atendimentos abertos.")
+        return
+
+    atendimento = atendimentos[-1]
+
+    atendimento.data_fim = datetime.now()
+    atendimento.duracao = atendimento.data_fim - atendimento.data_inicio
+
+    adcionar_historico(atendimento)
+
+    atendimentos.remove(atendimento)
+
+    print("Atendimento fechado!")
+    print("Duração:", atendimento.duracao)
+
+
+def adcionar_historico(atendimento):
+    historico.append(atendimento)
+
+
+def listar_historico():
+
+    print("\n=== Histórico de Atendimento ===")
+
+    if len(historico) == 0:
+        print("Nenhum atendimento finalizado.")
+        return
+
+    for atendimento in historico:
+        print(
+            "Cliente: {}, Atendente: {}, Data início: {}, Data fim: {}, Duração: {}".format(
+                atendimento.cliente.nome,
+                atendimento.atendente.nome,
+                atendimento.data_inicio,
+                atendimento.data_fim,
+                atendimento.duracao
+            )
+        )
