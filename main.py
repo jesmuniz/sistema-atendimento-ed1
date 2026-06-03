@@ -2,14 +2,17 @@ from services.cliente_services import (
     cadastrar_cliente,
     listar_clientes,
     cadastrar_atendente,
-    listar_atendentes
+    listar_atendentes,
+    buscar_cliente_binaria
+    
 )
 
 from services.atendimento_services import (
     abrir_atendimento,
     finalizar_atendimento,
     listar_historico,
-    desfazer_ultima_finalizacao
+    desfazer_ultima_finalizacao,
+    chamar_proximo_atendimento
 )
 
 from services.relatorio_service import (
@@ -34,12 +37,15 @@ def menu():
         print("2 - Cadastrar Atendente")
         print("3 - Listar Clientes")
         print("4 - Listar Atendentes")
-        print("5 - Abrir Atendimento")
-        print("6 - Finalizar Atendimento")
-        print("7 - Ver Histórico")
-        print("8 - Desfazer Última Finalização")
-        print("9 - Relatório")
-        print("10 - Exportar CSV")
+        print("5 - Buscar Cliente por ID")
+        print("6 - Abrir Atendimento")
+        print("7 - Chamar Próximo Atendimento")
+        print("8 - Finalizar Atendimento")
+        print("9 - Ver Histórico")
+        print("10 - Desfazer Última Finalização")
+        print("11 - Relatório")
+        print("12 - Exportar CSV")
+        print("0 - Sair")
 
         opcao = input("\nEscolha uma opção: ")
 
@@ -65,30 +71,42 @@ def menu():
 
         elif opcao == "5":
 
-            abrir_atendimento()
-            registrar_log("Atendimento aberto")
+            buscar_cliente_binaria()
 
         elif opcao == "6":
+
+            abrir_atendimento()
+            registrar_log("Cliente entrou na fila")
+
+        elif opcao == "7":
+
+            chamar_proximo_atendimento()
+            registrar_log("Próximo atendimento chamado")
+
+        elif opcao == "8":
 
             finalizar_atendimento()
             registrar_log("Atendimento finalizado")
 
-        elif opcao == "7":
+        elif opcao == "9":
 
             listar_historico()
             registrar_log("Histórico consultado")
-        
-        elif opcao == "8":
-
-             desfazer_ultima_finalizacao()
-
-        elif opcao == "9":
-
-             mostrar_relatorio()
 
         elif opcao == "10":
 
-             exportar_csv()
+            desfazer_ultima_finalizacao()
+            registrar_log("Última finalização desfeita")
+
+        elif opcao == "11":
+
+            mostrar_relatorio()
+            registrar_log("Relatório gerado")
+
+        elif opcao == "12":
+
+            exportar_csv()
+            registrar_log("Relatório exportado para CSV")
 
         elif opcao == "0":
 

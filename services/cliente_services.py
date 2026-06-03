@@ -165,3 +165,50 @@ def listar_atendentes():
 
     for atendente in atendentes:
         print(atendente)
+
+def busca_binaria_cliente(id_cliente):
+
+    clientes_ordenados = sorted(
+        clientes,
+        key=lambda cliente: cliente.id
+    )
+
+    esquerda = 0
+    direita = len(clientes_ordenados) - 1
+
+    while esquerda <= direita:
+
+        meio = (esquerda + direita) // 2
+
+        if clientes_ordenados[meio].id == id_cliente:
+            return clientes_ordenados[meio]
+
+        elif clientes_ordenados[meio].id < id_cliente:
+            esquerda = meio + 1
+
+        else:
+            direita = meio - 1
+
+    return None
+
+def buscar_cliente_binaria():
+
+    print("\n=== Busca Binária de Cliente ===")
+
+    try:
+        id_cliente = int(input("Digite o ID: "))
+
+    except ValueError:
+        print("ID inválido.")
+        return
+
+    cliente = busca_binaria_cliente(id_cliente)
+
+    if cliente:
+
+        print("\nCliente encontrado:")
+        print(cliente)
+
+    else:
+
+        print("Cliente não encontrado.")
