@@ -11,6 +11,11 @@ from services.atendimento_services import (
     listar_historico
 )
 
+from services.relatorio_service import (
+    mostrar_relatorio,
+    exportar_csv
+)
+
 from utils.logger import registrar_log
 
 
@@ -31,6 +36,8 @@ def menu():
         print("5 - Abrir Atendimento")
         print("6 - Finalizar Atendimento")
         print("7 - Ver Histórico")
+        print("8 - Relatório")
+        print("9 - Exportar CSV")
         print("0 - Sair")
 
         opcao = input("\nEscolha uma opção: ")
@@ -69,6 +76,14 @@ def menu():
 
             listar_historico()
             registrar_log("Histórico consultado")
+        
+        elif opcao == "8":
+
+             mostrar_relatorio()
+
+        elif opcao == "9":
+
+             exportar_csv()
 
         elif opcao == "0":
 

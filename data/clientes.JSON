@@ -4,5 +4,17 @@
         "nome": "Manuel Gomes",
         "telefone": "00 00000-0001",
         "prioridade": true
+    },
+    {
+        "id": 2,
+        "nome": "João Gomes",
+        "telefone": "00 00000-0002",
+        "prioridade": false
+    },
+    {
+        "id": 3,
+        "nome": "Vércio",
+        "telefone": "93 991397427",
+        "prioridade": true
     }
 ]
