@@ -8,6 +8,7 @@ from services.cliente_services import (
 
 atendimentos = []
 historico = []
+pilha_desfazer = []
 
 
 def abrir_atendimento():
@@ -50,6 +51,8 @@ def finalizar_atendimento():
 
     adicionar_historico(atendimento)
 
+    pilha_desfazer.append(atendimento)
+
     atendimentos.remove(atendimento)
 
     print("Atendimento finalizado com sucesso!")
@@ -78,3 +81,22 @@ def listar_historico():
         print(f"Início: {atendimento.data_inicio}")
         print(f"Fim: {atendimento.data_fim}")
         print(f"Duração: {atendimento.duracao}")
+
+def desfazer_ultima_finalizacao():
+
+    print("\n=== Desfazer Última Finalização ===")
+
+    if len(pilha_desfazer) == 0:
+        print("Nenhuma finalização para desfazer.")
+        return
+
+    atendimento = pilha_desfazer.pop()
+
+    historico.remove(atendimento)
+
+    atendimento.data_fim = None
+    atendimento.duracao = None
+
+    atendimentos.append(atendimento)
+
+    print("Última finalização desfeita com sucesso!")

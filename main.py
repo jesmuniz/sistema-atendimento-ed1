@@ -8,7 +8,8 @@ from services.cliente_services import (
 from services.atendimento_services import (
     abrir_atendimento,
     finalizar_atendimento,
-    listar_historico
+    listar_historico,
+    desfazer_ultima_finalizacao
 )
 
 from services.relatorio_service import (
@@ -36,9 +37,9 @@ def menu():
         print("5 - Abrir Atendimento")
         print("6 - Finalizar Atendimento")
         print("7 - Ver Histórico")
-        print("8 - Relatório")
-        print("9 - Exportar CSV")
-        print("0 - Sair")
+        print("8 - Desfazer Última Finalização")
+        print("9 - Relatório")
+        print("10 - Exportar CSV")
 
         opcao = input("\nEscolha uma opção: ")
 
@@ -79,9 +80,13 @@ def menu():
         
         elif opcao == "8":
 
-             mostrar_relatorio()
+             desfazer_ultima_finalizacao()
 
         elif opcao == "9":
+
+             mostrar_relatorio()
+
+        elif opcao == "10":
 
              exportar_csv()
 
