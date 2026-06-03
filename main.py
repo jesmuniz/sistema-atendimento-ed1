@@ -3,7 +3,9 @@ from services.cliente_services import (
     listar_clientes,
     cadastrar_atendente,
     listar_atendentes,
-    buscar_cliente_binaria
+    buscar_cliente_binaria,
+    remover_cliente_inativo,
+    listar_clientes_ativos
     
 )
 
@@ -45,6 +47,8 @@ def menu():
         print("10 - Desfazer Última Finalização")
         print("11 - Relatório")
         print("12 - Exportar CSV")
+        print("13 - Remover Cliente Inativo")
+        print("14 - Listar Clientes Ativos")
         print("0 - Sair")
 
         opcao = input("\nEscolha uma opção: ")
@@ -107,6 +111,14 @@ def menu():
 
             exportar_csv()
             registrar_log("Relatório exportado para CSV")
+        
+        elif opcao == "13":
+
+            remover_cliente_inativo()
+
+        elif opcao == "14":
+
+            listar_clientes_ativos()
 
         elif opcao == "0":
 

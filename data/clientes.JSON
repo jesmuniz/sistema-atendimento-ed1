@@ -1,11 +1,5 @@
 [
     {
-        "id": 1,
-        "nome": "Manuel Gomes",
-        "telefone": "00 00000-0001",
-        "prioridade": true
-    },
-    {
         "id": 2,
         "nome": "João Gomes",
         "telefone": "00 00000-0002",

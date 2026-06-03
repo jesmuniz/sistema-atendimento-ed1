@@ -2,6 +2,9 @@ from utils.arquivo import carregar_json, salvar_json
 from models.atendente import Atendente
 from models.cliente import Cliente
 from services.validacoes import validar_cliente, validar_atendente
+from structures.lista_encadeada import ListaEncadeada
+
+lista_clientes_ativos = ListaEncadeada()
 
 dados_clientes = carregar_json("data/clientes.json")
 dados_atendentes = carregar_json("data/atendentes.json")
@@ -15,6 +18,9 @@ clientes = [
     )
     for cliente in dados_clientes
 ]
+
+for cliente in clientes:
+    lista_clientes_ativos.inserir(cliente)
 
 atendentes = [
     Atendente(
@@ -77,7 +83,11 @@ def cadastrar_cliente():
 
     clientes.append(cliente)
 
+    lista_clientes_ativos.inserir(cliente)
+
     salvar_clientes()
+
+
 
     print("Cliente cadastrado com sucesso!")
 
@@ -212,3 +222,43 @@ def buscar_cliente_binaria():
     else:
 
         print("Cliente não encontrado.")
+
+def remover_cliente_inativo():
+
+    print("\n=== Remover Cliente Inativo ===")
+
+    try:
+        id_cliente = int(input("ID do cliente: "))
+
+    except ValueError:
+        print("ID inválido.")
+        return
+
+    cliente_encontrado = None
+
+    for cliente in clientes:
+
+        if cliente.id == id_cliente:
+
+            cliente_encontrado = cliente
+            break
+
+    if cliente_encontrado is None:
+
+        print("Cliente não encontrado.")
+        return
+
+    clientes.remove(cliente_encontrado)
+
+    lista_clientes_ativos.remover(id_cliente)
+
+    salvar_clientes()
+
+    print("Cliente removido com sucesso!")
+
+
+def listar_clientes_ativos():
+
+    print("\n=== Clientes Ativos (Lista Encadeada) ===")
+
+    lista_clientes_ativos.listar()
