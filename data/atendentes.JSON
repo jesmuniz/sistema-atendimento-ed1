@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "id": 2,
+        "nome": "Roberto Reis"
+    },
+    {
+        "id": 1,
+        "nome": "Carol Mardegan"
+    },
+    {
+        "id": 3,
+        "nome": "Roberta Passos"
+    },
+    {
+        "id": 10,
+        "nome": "Henrique Correa"
+    }
+]
